@@ -38,43 +38,71 @@ The data required for XMR charts take a specific format, with at least two colum
 
 Like so:
 
-```{r, message=FALSE, echo = F}
-library(xmrr)
-library(dplyr)
-library(ggplot2)
-set.seed(1)
-Measure <- round(runif(12, min = 0.50, max = 0.66)*100, 0)
-Measure <- c(Measure, round(runif(6, min = 0.70, max = .85)*100, 0))
-Time <- c(2000:2017) 
-example_data <- data.frame(Time, Measure)
-knitr::kable(example_data, format = "markdown", align = 'c')
-```
+
+| Time | Measure |
+|:----:|:-------:|
+| 2000 |   54    |
+| 2001 |   56    |
+| 2002 |   59    |
+| 2003 |   65    |
+| 2004 |   53    |
+| 2005 |   64    |
+| 2006 |   65    |
+| 2007 |   61    |
+| 2008 |   60    |
+| 2009 |   51    |
+| 2010 |   53    |
+| 2011 |   53    |
+| 2012 |   80    |
+| 2013 |   76    |
+| 2014 |   82    |
+| 2015 |   77    |
+| 2016 |   81    |
+| 2017 |   85    |
 
 If we wanted to use `xmr()` on this data would be written like this: 
 
-```{r, message=FALSE, eval = F}
+
+```r
 xmr_data <- xmr(df = example_data, measure = "Measure")
 ```
 
 And if we wanted the bounds to recalculate, we'd use this.
 
-```{r, message=FALSE, eval = F}
+
+```r
 xmr_data <- xmr(df = example_data, measure = "Measure", recalc = T)
 ```
 
 Output data looks like this:
-```{r, echo=F, message=FALSE}
-xmr_data <- xmr(example_data, "Measure", 
-                recalc = T) %>% 
-  select(-Order)
-knitr::kable(xmr_data, format = "markdown", align = 'c')
-```
+
+| Time | Measure | Central Line | Moving Range | Average Moving Range | Lower Natural Process Limit | Upper Natural Process Limit |
+|:----:|:-------:|:------------:|:------------:|:--------------------:|:---------------------------:|:---------------------------:|
+| 2000 |   54    |    57.400    |      NA      |          NA          |             NA              |             NA              |
+| 2001 |   56    |    57.400    |      2       |        5.750         |           42.105            |           72.695            |
+| 2002 |   59    |    57.400    |      3       |        5.750         |           42.105            |           72.695            |
+| 2003 |   65    |    57.400    |      6       |        5.750         |           42.105            |           72.695            |
+| 2004 |   53    |    57.400    |      12      |        5.750         |           42.105            |           72.695            |
+| 2005 |   64    |    57.400    |      11      |        5.750         |           42.105            |           72.695            |
+| 2006 |   65    |    57.400    |      1       |        5.750         |           42.105            |           72.695            |
+| 2007 |   61    |    57.400    |      4       |        5.750         |           42.105            |           72.695            |
+| 2008 |   60    |    57.400    |      1       |        5.750         |           42.105            |           72.695            |
+| 2009 |   51    |    57.400    |      9       |        5.750         |           42.105            |           72.695            |
+| 2010 |   53    |    57.400    |      2       |        5.750         |           42.105            |           72.695            |
+| 2011 |   53    |    57.400    |      0       |        5.750         |           42.105            |           72.695            |
+| 2012 |   80    |    79.333    |      27      |        12.333        |           46.527            |           112.140           |
+| 2013 |   76    |    79.333    |      4       |        12.333        |           46.527            |           112.140           |
+| 2014 |   82    |    79.333    |      6       |        12.333        |           46.527            |           112.140           |
+| 2015 |   77    |    79.333    |      5       |        12.333        |           46.527            |           112.140           |
+| 2016 |   81    |    79.333    |      4       |        12.333        |           46.527            |           112.140           |
+| 2017 |   85    |    79.333    |      4       |        12.333        |           46.527            |           112.140           |
 
 The only mandatory arguments are **df**, because the function needs to operate on a dataframe, and **measure** because the function needs to be told which column contains the measurements. Everything else has been set to what I believe is a safe and sensible default. 
 
 In our shop, we typically run the following rules. Since they are the default, there is no need to specify them directly:
 
-```{r, message = FALSE}
+
+```r
 xmr_data <- xmr(example_data,  "Measure", 
                 recalc = T,
                 interval = 5,
@@ -84,7 +112,8 @@ xmr_data <- xmr(example_data,  "Measure",
 
 Feel free to play around with your own definitions of what a shortrun or longrun is.
 
-```{r, message = FALSE, eval = F}
+
+```r
 xmr_data <- xmr(df = example_data, 
                 measure = "Measure", 
                 recalc = T,
@@ -129,100 +158,16 @@ The arguments for `xmr_chart()` are:
 
 There are defaults set for most arguments, so all the user *needs* to supply are the column names for the Time and Measurement column unless they want some slight modification of the default chart.
 
-```{r, fig.height=5, fig.width=7}
-xmr_chart(df = xmr_data, 
-          time = "Time", 
-          measure = "Measure",
-          line_width = 0.75, text_size = 12, point_size = 2.5)
-```
-
-A work-flow that I use is to 'pipe' the output of `xmr()` directly into `xmr_chart()`:
-
-```{r, eval = F}
-example_data %>% 
-  xmr("Measure", recalc = T) %>% 
-  xmr_chart("Time", "Measure")
-```
-
--------
-
-# Tidyverse - dplyr & ggplot2
-
-Simple datasets like those illustrated above are common, but how could we work with large datasets that have multiple factors?
-
-Consider the following data. How would `xmr()` benefit the user in this case? 
-
-```{r, message=FALSE, echo = F}
-library(xmrr)
-library(dplyr)
-`Year` <- seq(2004, 2017, 1)
-Variable <- "A"
-FDA <- data.frame(`Year`, Variable, check.names = F)
-Variable <- "B"
-FDB <- data.frame(`Year`, Variable, check.names = F)
-MFD <- rbind(FDA, FDB)
-
-MFD$Measure <- runif(nrow(MFD))*100
-MFD$Measure <- round(MFD$Measure, 0)
-knitr::kable(MFD, format = "markdown", align = 'c')
-```
-
-The answer is by leveraging other R packages, namely the `tidyverse`. 
-
-You can install and load the tidyverse with: 
-
-```{r, eval = F}
-#this installs many useful packages
-install.packages("tidyverse")
-
-#this just loads the ones we need
-library(dplyr)
-library(ggplot2)
-```
 
 
-With `dplyr`, we can make use of powerful data-wrangling verbs without writing them into `xmrr`'s functions specifically:
 
-- `select()`:-	picks variables based on their names.
-- `filter()`:-	picks cases based on their values.
-- `arrange()`:-	changes the ordering of the rows.
-- `mutate()`:-	adds new variables that are functions of existing variables.
-- `summarise()`:-	reduces multiple values down to a single summary.
-- `group_by()`:-	allows for group operations in the "split-apply-combine" concept
 
-Also loaded with `dplyr` is a powerful operator to chain functions together, called a pipe `%>%`. 
 
-With `ggplot2`, we take a modern approach to visualizing data. An up-to-date reference list of functions can be found [here](http://ggplot2.tidyverse.org/reference/)
 
-This enables a number of verb-type functions for tidying, wrangling, and plotting data. This is how to use them alongside the `xmr()` and `xmr_chart()` functions. 
 
--------
 
-# Grouping and Faceting
 
-Take our multiple factor data `MFD` - here is how to apply the `xmr()` function to certain groups within that data. 
 
-```{r}
-MFD_xmr <- MFD %>% 
-  group_by(Variable) %>% 
-  do(xmr(., "Measure", recalc = T))
-```
 
-To obtain the following:
 
-```{r, echo=FALSE}
-knitr::kable(MFD_xmr, format = "markdown", align = 'c')
-```
 
-And as you may be able to see in the data, the `xmr()` calculated on Measure **BY** Variable in one chained function instead of having to manually split the data and run the function multiple times. This is possible with an arbitrary number of factors, and leverages the speed of `dplyr` verbs. 
-
-Similarly, `ggplot2` can be leveraged in plotting. Note that since `xmr_chart()` outputs a ggplot object, we can apply the regular ggplot2 functions to it and return a faceted chart rather than filtering the chart and making two.
-
-```{r, fig.height=5, fig.width=7}
-MFD %>% 
-  group_by(Variable) %>% 
-  do(xmr(., "Measure", recalc = T)) %>% 
-  xmr_chart("Year", "Measure", line_width = 0.75, text_size = 12) + 
-  facet_wrap(~Variable) + 
-  scale_x_discrete(breaks = seq(2004, 2017, 4))
-```
