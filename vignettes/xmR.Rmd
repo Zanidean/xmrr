@@ -1,0 +1,202 @@
+---
+title: "How to Use xmr() and xmr_chart() functions"
+author: "Alex Zanidean"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+#Introduction
+
+XMR control charts are useful when determining if there are significant trends in data. XMR charts have two key assumptions: one is that the measurements of value happen over time, and the other is that each measurement of time has exactly one measurement of value. 
+
+
+Take careful thought about *what* you are trying to measure with XMR. Proportions work great, headcount is okay, costs over time don't work well.
+
+-------
+
+#Arguments
+
+The arguments for `xmr()` are: 
+
+- **df**: The dataframe containing the time-series data.
+
+- **measure**: The column containing the measure. This must be in a numeric format.
+
+- **interval**: The interval you'd like to use to calculate the averages. Defaults to 5.
+
+- **recalc**: Logical if you'd like it to recalculate bounds. Defaults to False for safety.
+
+- **reuse**: Logical: Should points be re-used in calculations? Defaults to False.
+
+- **longrun**: A vector of 2 to determine the rules for a long run. The first point is the 'n' of points used to calculate the new reference lines, and the second is to determine how many consecutive points are needed to define a longrun. Default is c(5,8) which uses the first 5 points of a run of 8 to recalculate the bounds. 
+
+- **shortrun**: A vector of 2 to determine the rules for a short run. The first point is the minimum number of points within the set to qualify a shortrun, and the second is the length of a possible set. Default is c(3,4) which states that 3 of 4 consecutive points need to pass the test to be used in a calculation. 
+
+The data required for XMR charts take a specific format, with at least two columns of data - one for the time variable and another for the measurement. Like so:
+
+```{r, message=FALSE, echo = F}
+library(xmrr)
+library(tidyverse)
+set.seed(1)
+Measure <- round(runif(12, min = 0.50, max = 0.66)*100, 0)
+Measure <- c(Measure, round(runif(6, min = 0.70, max = .85)*100, 0))
+Time <- c(2000:2017) 
+example_data <- data.frame(Time, Measure)
+knitr::kable(example_data, format = "markdown", align = 'c')
+```
+
+The use of `xmr()` on this set of data would be written like this if we wanted the boundaries to recalculate. 
+
+```{r, message=FALSE, eval = F}
+xmr_data <- xmr(df = example_data, measure = "Measure", recalc = T)
+```
+
+Output data looks like this:
+```{r, echo=F, message=FALSE}
+xmr_data <- xmr(example_data, "Measure", 
+                recalc = T) %>% 
+  select(-Order)
+knitr::kable(xmr_data, format = "markdown", align = 'c')
+```
+
+The only mandatory arguments are 'df', because the function needs to operate on a dataframe, and 'measure' because the function needs to be told which column contains the measurements. Everything else has been set to what I believe is a safe and sensible default. 
+
+In our shop, we typically run the following rules, although since they are default there is no need to specify them directly:
+
+```{r, message = FALSE}
+xmr_data <- xmr(example_data,  "Measure", 
+                recalc = T,
+                interval = 5,
+                shortrun = c(3,4),
+                longrun = c(5,8))
+```
+
+Which uses the recalculation function, along with the default shortrun and longrun definitions. Feel free to play around with your own definitions of what a shortrun or longrun is.
+
+```{r, message = FALSE, eval = F}
+xmr_data <- xmr(df = example_data, 
+                measure = "Measure", 
+                recalc = T,
+                #change the rule like so:,
+                interval = 4,
+                shortrun = c(2,3))
+```
+
+The statistical differences between rules are slight, but each user will have different needs and it's useful to be able to tune the function to those needs. 
+
+With that said, it is important to use a consistent definition of what a long/short run are. It wouldn't be entirely appropriate in one report to use one set of definitions for one dataset, and another set for a different dataset.
+
+-------
+
+# Charts
+
+The `xmr()` function is handy for generating chart data as the output can be saved and used in other applications. But what about visualization within R?
+
+`xmr_chart()` takes the output from `xmr()` and generates a ggplot graphic. This works well for reporting, but it also works great for quick diagnostics of your data.
+
+The arguments for `xmr_chart()` are as follows. 
+
+- **dataframe**: Output from xmr()
+
+- **time**: The column containing the time variable for the x-axis.
+
+- **measure**: The column containing the measure for the y-axis. 
+
+- **boundary_linetype**: Type of line for upper and lower boundary lines. Defaults to "dashed".
+
+- **central_linetype**: Type of line for central line. Defaults to "dotted".
+
+- **boundary_colour**:	Colour of line for upper and lower boundary lines. Defaults to "#d02b27".
+
+- **point_colour**:	Colour of points. Defaults to "#7ECBB5".
+
+- **point_size**:	Size of points. Defaults to 2.
+
+- **line_width**:	Width of lines. Defaults to 0.5.
+
+- **text_size**:	Size of chart text. Defaults to 9.
+
+There are defaults set for most arguments, so all the user *needs* to supply are the column names for the Time and Measurement column unless they want some slight modification of the default chart.
+
+```{r, fig.height=5, fig.width=7.5}
+xmr_chart(dataframe = xmr_data, 
+          time = "Time", 
+          measure = "Measure",
+          line_width = 0.75, text_size = 12, point_size = 2.5)
+```
+
+A work-flow that I use is to 'pipe' the output of `xmr()` directly into `xmr_chart()`:
+
+```{r, eval = F}
+example_data %>% 
+  xmr("Measure", recalc = T) %>% 
+  xmr_chart("Time", "Measure")
+```
+
+-------
+
+# Tidyverse
+
+Simple datasets like those illustrated above are common, but how would we work with large datasets that have multiple factors. Consider the following data. How would `xmr()` benefit the user in this case? 
+
+```{r, message=FALSE, echo = F}
+library(xmrr)
+library(tidyverse)
+`Year` <- seq(2004, 2017, 1)
+Variable <- "A"
+FDA <- data.frame(`Year`, Variable, check.names = F)
+Variable <- "B"
+FDB <- data.frame(`Year`, Variable, check.names = F)
+MFD <- rbind(FDA, FDB)
+
+MFD$Measure <- runif(nrow(MFD))*100
+MFD$Measure <- round(MFD$Measure, 0)
+knitr::kable(MFD, format = "markdown", align = 'c')
+```
+
+The answer is by leveraging other R packages, namely the `tidyverse`. 
+
+You can install and load the tidyverse by the following. 
+
+```{r, eval = F}
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+What this enables is a number of verb-type functions for tidying and wrangling data. This is how to use them alongside the `xmr()` function. 
+
+
+-------
+
+# Grouping and Faceting
+
+Take our multiple factor data `MFD` - here is how to apply the `xmr()` function to certain groups within that data. 
+
+```{r}
+MFD_xmr <- MFD %>% 
+  group_by(Variable) %>% 
+  do(xmr(., "Measure", recalc = T))
+```
+
+To obtain the following:
+
+```{r, echo=FALSE}
+knitr::kable(MFD_xmr, format = "markdown", align = 'c')
+```
+
+And as you may be able to see in the data, the `xmr()` calculated on Measure **BY** Variable, in one function instead of having to manually split the data and run the function twice. This is possible with an arbitrary number of factors, and leverages the speed of `dplyr` verbs. 
+
+Now, if we tried to plot this data we would do the following. Note that since `xmr_chart()` outputs a ggplot object, we can apply the regular ggplot2 functions to it and return a faceted chart rather than filtering the chart and making two.
+
+```{r, fig.height=5, fig.width=7.5}
+MFD %>% 
+  group_by(Variable) %>% 
+  do(xmr(., "Measure", recalc = T)) %>% 
+  xmr_chart("Year", "Measure", line_width = 0.75, text_size = 12) + 
+  facet_wrap(~Variable) + 
+  scale_x_discrete(breaks = scales::pretty_breaks(5))
+```
