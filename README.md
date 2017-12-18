@@ -1,11 +1,11 @@
 Overview
 ---------
 
-sRa is a package designed to speed-up institutional research by providing a set of generalized functions for common tasks:
+xmrr is a package designed to speed-up institutional research by providing a set of generalized functions for common tasks:
 
-- `xmR()`: [Generates XMR data.](https://sramhc.shinyapps.io/xmrbuilder/)
+- `xmr()`: [Generates XMR data.](https://sramhc.shinyapps.io/xmrbuilder/)
 
-- `xmR_chart()`: Takes the output from xmR and makes an XMR chart.
+- `xmr_chart()`: Takes the output from xmR and makes an XMR chart.
 
 
 Installation
@@ -15,7 +15,7 @@ For the development version:
 
 ``` R
 install.packages("xmrr")
-devtools::install_github("zanidean/sRa")
+devtools::install_github("zanidean/xmrr")
 ```
 
 For the official CRAN version:
