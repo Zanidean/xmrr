@@ -1,7 +1,7 @@
 #'Generate the XMR chart for XMR data
 #'@description Useful for diagnostics on xmR, and just visualizing the data.
 #'
-#'@param dataframe Output from xmR()
+#'@param df Output from xmR()
 #'@param time Time column
 #'@param measure Measure
 #'@param boundary_linetype Type of line for upper and lower boundary lines. Defaults to "dashed".
@@ -19,7 +19,7 @@
 #'@import ggplot2
 #'@import tidyr
 #'@export xmr_chart
-xmr_chart <- function(dataframe, time, measure, 
+xmr_chart <- function(df, time, measure, 
                       boundary_linetype = "dashed",
                       central_linetype = "dotted",
                       boundary_colour = "#d02b27",
@@ -32,7 +32,7 @@ xmr_chart <- function(dataframe, time, measure,
     `Lower Natural Process Limit` <- .
     `Upper Natural Process Limit` <- .
     
-    plot <- ggplot2::ggplot(dataframe, aes(as.character(dataframe[[time]]), group = 1)) +
+    plot <- ggplot2::ggplot(df, aes(as.character(df[[time]]), group = 1)) +
       geom_line(aes(y = `Central Line`),
                 size = line_width, 
                 linetype = central_linetype, 
@@ -46,10 +46,10 @@ xmr_chart <- function(dataframe, time, measure,
                 color = boundary_colour,
                 size = line_width, 
                 linetype = boundary_linetype, na.rm = T) +
-      geom_line(aes(y = dataframe[[measure]])) + 
-      geom_point(aes(y = dataframe[[measure]]), 
+      geom_line(aes(y = df[[measure]])) + 
+      geom_point(aes(y = df[[measure]]), 
                  size = point_size, color = "#000000") +
-      geom_point(aes(y = dataframe[[measure]]), 
+      geom_point(aes(y = df[[measure]]), 
                  size = point_size*.625, color = point_colour) +
       guides(colour=FALSE) + 
       labs(x = time, y = measure) + 
