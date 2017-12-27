@@ -59,6 +59,7 @@ xmr <- function(df, measure, interval, recalc, reuse, testing, longrun, shortrun
     z <-  z / 10 ^ n
     z * posneg
   }
+  
   interval <- round2(interval, 0)
   df$Order <- seq(1, nrow(df), 1)
   points <- seq(1, interval, 1)
