@@ -11,14 +11,16 @@ example_data <- data.frame(Time, Measure)
 
 df <- xmr(example_data, measure = "Measure", recalc = T)
 
+#xmr_chart(df, 'Time', 'Measure') + geom_text(aes(y = Measure, label = Order))
+
 test_that("Upper shortrun recalculation is correct", {
-  mv <- df$`Moving Range`[df$Order %in% c(11:15)] %>% mean()
+  mv <- df$`Moving Range`[df$Order %in% c(8:12)] %>% mean()
   avm <-  df$`Average Moving Range`[11]
   calc <- avm - mv
   max <- max(calc, na.rm = T)
   expect_lt(max, 0.01)
   
-  m <- df$Measure[df$Order %in% c(11:15)] %>% mean()
+  m <- df$Measure[df$Order %in% c(8:12)] %>% mean()
   cl <-  df$`Central Line`[11]
   calc <- m - cl
   max <- max(calc, na.rm = T)

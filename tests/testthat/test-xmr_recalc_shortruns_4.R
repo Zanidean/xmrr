@@ -45,7 +45,10 @@ Measure <- c(58, 57, 69, 62, 66, 58, 76, 73, 55, 72)
 Time <- c(2000:2009) 
 example_data <- data.frame(Time, Measure)
 
-df <- xmr(example_data, measure = "Measure", recalc = T)
+df <- xmr(example_data, measure = "Measure", recalc = T, shortrun = c(3,4))
+
+xmr_chart(df, "Time", "Measure") + 
+  geom_text(aes(y = Measure, label = Order), vjust = -1)
 
 test_that("Upper shortrun recalculation is correct", {
   mv <- df$`Moving Range`[df$Order %in% c(7, 8, 10)] %>% mean()

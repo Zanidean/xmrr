@@ -45,6 +45,7 @@ xmr <- function(df, measure, interval, recalc, reuse, testing, longrun, shortrun
     shortrun <- c(3, 4)
   }
   
+  sr_length = length(shortrun)
   
   if(length(shortrun) == 1){
     shortrun <- c(shortrun, shortrun)
@@ -124,29 +125,64 @@ xmr <- function(df, measure, interval, recalc, reuse, testing, longrun, shortrun
       return(df)
     }
   }
-  #run subsetters
-  shortrun_subset <- function(df, test, order, measure, points, int){
-    int <- int
-    subsets <- c()
-    value <- "1"
-    run <- shortrun[2]
-    percentage <- run * (shortrun[1]/shortrun[2])
-
-    for (i in int:nrow(df)){
-      pnts <- i:(i + shortrun[1])
-      q <- df[[test]][df[[order]] %in% pnts]
-      r <- as.data.frame(table(q))
-      if (!any(is.na(q) == T) && (value %in% r$q)){
-        if (r$Freq[r$q == value] >= percentage &&
-           !(pnts %in% points)){
-          subset <- df[df[[order]] %in% pnts, ]
-          df <- df[!(df[[order]] %in% pnts), ]
-          subsets <- rbind(subsets, subset)
+  
+  if(sr_length == 1){
+      
+      #run subsetters
+      shortrun_subset <- function(df, test, order, measure, points, int){
+        int <- int
+        subsets <- c()
+        value <- "1"
+        run <- shortrun[2]
+        percentage <- run * (shortrun[1]/shortrun[2])
+    
+        for (i in int:nrow(df)){
+          pnts <- i:(i + shortrun[1]-1)
+          q <- df[[test]][df[[order]] %in% pnts]
+          r <- as.data.frame(table(q))
+          if (!any(is.na(q) == T) && (value %in% r$q)){
+            if (r$Freq[r$q == value] >= percentage &&
+               !(pnts %in% points)){
+              subset <- df[df[[order]] %in% pnts, ]
+              df <- df[!(df[[order]] %in% pnts), ]
+              subsets <- rbind(subsets, subset)
+            }
+          }
         }
+        return(subsets[1:(shortrun[2]), ])
       }
-    }
-    return(subsets[1:(shortrun[2]), ])
+  
+  } else {
+      
+      #run subsetters
+      shortrun_subset <- function(df, test, order, measure, points, int){
+        int <- int
+        subsets <- c()
+        value <- "1"
+        run <- shortrun[2]
+        percentage <- run * (shortrun[1]/shortrun[2])
+        
+        for (i in int:nrow(df)){
+          pnts <- i:(i + shortrun[1])
+          q <- df[[test]][df[[order]] %in% pnts]
+          r <- as.data.frame(table(q))
+          if (!any(is.na(q) == T) && (value %in% r$q)){
+            if (r$Freq[r$q == value] >= percentage &&
+                !(pnts %in% points)){
+              subset <- df[df[[order]] %in% pnts, ]
+              df <- df[!(df[[order]] %in% pnts), ]
+              subsets <- rbind(subsets, subset)
+            }
+          }
+        }
+        return(subsets[1:(shortrun[2]), ])
+      }
+      
   }
+  
+  
+  
+  
   run_subset <- function(subset, order, df, type, side, points){
     if (missing(type)){
       type <- "long"
