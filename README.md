@@ -1,7 +1,7 @@
 Overview
 ---------
 
-xmrr is a package designed to speed-up institutional research by providing a set of generalized functions for common tasks:
+xmrr is a package designed to generate and visualize control charts from time-series data.
 
 - `xmr()`: [Generates XMR data.](https://sramhc.shinyapps.io/xmrbuilder/)
 
