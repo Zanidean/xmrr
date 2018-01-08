@@ -10,8 +10,8 @@
 #'@param recalc Logical: if you'd like it to recalculate bounds. Defaults to False
 #'@param reuse Logical: Should points be re-used in calculations? Defaults to False
 #'@param testing Logical to print test results
-#'@param longrun Vector of 2 to determine rules for long run. First point is the 'n' of points used to recalculate with, and the second is to determine what qualifies as a long run. Default is c(5,8) which uses the first 5 points of a run of 8 to recalculate the bounds. 
-#'@param shortrun Vector of 2 to determine rules for a short run. The first point is the minimium number of points within the set to qualify a shortrun, and the second is the length of a possible set. Default is c(3,4) which states that 3 of 4 points need to pass the test to be used in a calculation. 
+#'@param longrun Used to determine rules for long run. First point is the 'n' of points used to recalculate with, and the second is to determine what qualifies as a long run. Default is c(5,8) which uses the first 5 points of a run of 8 to recalculate the bounds. If a single value is used, then that value is used twice i.e. c(6,6))
+#'@param shortrun Used to determine rules for a short run. The first point is the minimium number of points within the set to qualify a shortrun, and the second is the length of a possible set. Default is c(3,4) which states that 3 of 4 points need to pass the test to be used in a calculation. If a single value is used, then that value is used twice i.e. c(3,3))
 #'@examples
 #'\donttest{
 #'df <- xmr(df, "Measure", recalc = T)
@@ -24,7 +24,8 @@
 #'@import tidyr
 #'@export xmr
 xmr <- function(df, measure, interval, recalc, reuse, testing, longrun, shortrun) {
-  . <- "Shut up"
+  
+  . <- "NA"
   if (missing(interval)){
     interval <- 5
     }
@@ -43,14 +44,25 @@ xmr <- function(df, measure, interval, recalc, reuse, testing, longrun, shortrun
   if (missing(shortrun)){
     shortrun <- c(3, 4)
   }
+  
+  
+  if(length(shortrun) == 1){
+    shortrun <- c(shortrun, shortrun)
+  }
+  
+  if(length(longrun) == 1){
+    longrun <- c(longrun, longrun)
+  }
+  
+  
+  
   if (longrun[1] > longrun[2]){
     message("Invalid longrun argument. First digit must be less than or equal to the second.")
   }
   if (shortrun[1] > shortrun[2]){
     message("Invalid shortrun argument. First digit must be less than or equal to the second.")
   }
-  
-  
+
   round2 <- function(x, n) {
     posneg <- sign(x)
     z <- abs(x) * 10 ^ n
