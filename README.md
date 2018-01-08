@@ -5,7 +5,7 @@ xmrr is a package designed to speed-up institutional research by providing a set
 
 - `xmr()`: [Generates XMR data.](https://sramhc.shinyapps.io/xmrbuilder/)
 
-- `xmr_chart()`: Takes the output from xmR and makes an XMR chart.
+- `xmr_chart()`: Takes the output from xmr and makes an XMR chart.
 
 
 Installation
