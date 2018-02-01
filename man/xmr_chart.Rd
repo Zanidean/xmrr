@@ -31,7 +31,7 @@ xmr_chart(df, time, measure, boundary_linetype = "dashed",
 \item{text_size}{Size of chart text. Defaults to 9.}
 }
 \description{
-Useful for diagnostics on xmR, and just visualizing the data.
+Useful for diagnostics on xmr, and just visualizing the data.
 }
 \examples{
 \donttest{

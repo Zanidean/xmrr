@@ -1,5 +1,5 @@
 #'Generate the XMR chart for XMR data
-#'@description Useful for diagnostics on xmR, and just visualizing the data.
+#'@description Useful for diagnostics on xmr, and just visualizing the data.
 #'
 #'@param df Output from xmR()
 #'@param time Time column
