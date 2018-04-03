@@ -92,14 +92,14 @@ xmr <- function(df, measure, interval, recalc, reuse, testing, longrun, shortrun
   }
   #starting conditions
   starter <- function(dat){
-    original_cent <- mean(dat[[measure]][1:interval])
+    original_cent <- mean(dat[[measure]][1:interval], na.rm = T)
     dat$`Central Line` <- original_cent
     #moving range
     dat$`Moving Range` <- abs(dat[[measure]] - dplyr::lag(dat[[measure]], 1))
     for (i in 1:(nrow(dat) - 1)) {
       dat$`Moving Range`[i + 1] <- abs(dat[[measure]][i] - dat[[measure]][i + 1])
     }
-    dat$`Average Moving Range` <- mean(dat$`Moving Range`[2:(interval)])
+    dat$`Average Moving Range` <- mean(dat$`Moving Range`[2:(interval)], na.rm = T)
     dat$`Average Moving Range`[1] <- NA
     dat <- limits(dat)
     return(dat)
@@ -287,9 +287,9 @@ xmr <- function(df, measure, interval, recalc, reuse, testing, longrun, shortrun
     #upper longruns
     if (side == "upper" && run == "long"){
        dat_sub <- dat %>%
-        filter(., .[[measure]] > .$`Central Line` &
-                 !(.$Order %in% points)) %>%
-        arrange(., .$Order)
+        filter(., .[[measure]] > `Central Line` &
+                 !(Order %in% points)) %>%
+        arrange(., Order)
        dat_sub <- run_subset(dat_sub, "Order")
        rep <- nrow(dat_sub)
        while (rep >= l){
@@ -301,8 +301,8 @@ xmr <- function(df, measure, interval, recalc, reuse, testing, longrun, shortrun
            print(calcpoints)
          }
          dat_sub <- dat %>%
-           filter(., .[[measure]] > .$`Central Line` & !(.$Order %in% points)) %>%
-           arrange(., .$Order)
+           filter(., .[[measure]] > `Central Line` & !(Order %in% points)) %>%
+           arrange(., Order)
          dat_sub <- run_subset(dat_sub, "Order")
          rep <- nrow(dat_sub)
         }
@@ -310,11 +310,11 @@ xmr <- function(df, measure, interval, recalc, reuse, testing, longrun, shortrun
     #lower longruns
     else if (side == "lower" && run == "long"){
       dat_sub <- dat %>%
-        filter(., .[[measure]] < .$`Central Line` &
+        filter(., .[[measure]] < `Central Line` &
                  #abs(.[[measure]] - `Central Line`) <
                  #abs(.[[measure]] - `Lower Natural Process Limit`) &
-                 !(.$Order %in% points)) %>%
-        arrange(., .$Order)
+                 !(Order %in% points)) %>%
+        arrange(., Order)
       dat_sub <- run_subset(dat_sub, "Order")
       rep <- nrow(dat_sub)
       while (rep >= l){
@@ -326,8 +326,8 @@ xmr <- function(df, measure, interval, recalc, reuse, testing, longrun, shortrun
           print(calcpoints)
         }
         dat_sub <- dat %>%
-          filter(., .[[measure]] < .$`Central Line` & !(.$Order %in% points)) %>%
-          arrange(., .$Order)
+          filter(., .[[measure]] < `Central Line` & !(Order %in% points)) %>%
+          arrange(., Order)
         dat_sub <- run_subset(dat_sub, "Order")
         rep <- nrow(dat_sub)
       }
