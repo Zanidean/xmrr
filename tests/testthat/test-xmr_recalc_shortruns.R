@@ -10,7 +10,8 @@ Measure <- c(58, 57, 69, 62, 66, 58, 66, 52, 51, 51, 87, 78, 99, 100, 89, 82, 95
 Time <- c(2000:2017) 
 example_data <- data.frame(Time, Measure)
 
-df <- xmr(example_data, measure = "Measure", recalc = T, shortrun = c(3,4))
+df <- xmr(example_data, measure = "Measure", 
+          recalc = T, shortrun = c(3,4))
 
 #xmr_chart(df, 'Time', 'Measure') + geom_text(aes(y = Measure, label = Order))
 

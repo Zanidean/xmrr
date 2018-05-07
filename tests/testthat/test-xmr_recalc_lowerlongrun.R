@@ -5,13 +5,13 @@ library(tidyr)
 
 context("Calculate XMR Lower Long Run Recalculation")
 
-Measure <- c(58, 57, 69, 62, 66, 58, 66, 62, 61, 51, 57, 58, 59, 50, 59, 58, 57, 59)
+Measure <- c(58, 57, 69, 62, 66, 58, 66, 62,
+             61, 51, 57, 58, 59, 50, 59, 58, 57, 59)
 Time <- c(2000:2017) 
 example_data <- data.frame(Time, Measure)
 
 df <- xmr(example_data, measure = "Measure", recalc = T)
 
-#xmr_chart(df, 'Time', 'Measure') + geom_text(aes(y = Measure, label = Order))
 
 test_that("Upper shortrun recalculation is correct", {
   mv <- df$`Moving Range`[df$Order %in% c(8:12)] %>% mean()

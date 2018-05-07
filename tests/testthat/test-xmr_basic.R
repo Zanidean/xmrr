@@ -6,12 +6,12 @@ library(tidyr)
 
 context("Calculate XMR Basics")
 
-int_test <- 30
+int_test <- 100
 
 y2 <- 2000 + int_test
 
 Year <- seq(2001, y2, 1)
-Measure <-  runif(length(Year))*100 %>% round(0)
+Measure <-  runif(length(Year))*100 %>% round(0) %>% as.integer()
 
 
 

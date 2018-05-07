@@ -20,7 +20,7 @@ Measure <-  Measure <- c(59, 53, 56, 52, 58, 55, 58, 52, 52,
 #   geom_text(aes(y = Measure, label = Measure))
 
 
-test_that("Shortrun vector works right", {
+test_that("Modified/Single Longrun works right", {
   df <- data.frame(Year, Measure) %>% 
     xmr(., "Measure", recalc = T, longrun = 7)
   point <- df$`Upper Natural Process Limit`[8]
@@ -29,7 +29,17 @@ test_that("Shortrun vector works right", {
   expect_lt(max, 0.01)
 })
 
-test_that("Single shortrun vector works right", {
+test_that("Modified/Multiple Longrun works right", {
+  df <- data.frame(Year, Measure) %>% 
+    xmr(., "Measure", recalc = T, longrun = c(5,7))
+  point <- df$`Upper Natural Process Limit`[8]
+  last <- df$`Upper Natural Process Limit`[14]
+  max <- max(point - last, na.rm = T)
+  expect_lt(max, 0.01)
+})
+
+
+test_that("Regular/Single Longrun works right", {
   df <- data.frame(Year, Measure) %>% 
     xmr(., "Measure", recalc = T, longrun = 8)
   point <- df$`Upper Natural Process Limit`[8]
@@ -37,4 +47,15 @@ test_that("Single shortrun vector works right", {
   max <- max(point - last, na.rm = T)
   expect_lt(max, 0.01)
 })
+
+test_that("Regular/Multiple Longrun works right", {
+  df <- data.frame(Year, Measure) %>% 
+    xmr(., "Measure", recalc = T, longrun = c(5,8))
+  point <- df$`Upper Natural Process Limit`[8]
+  last <- df$`Upper Natural Process Limit`[18]
+  max <- max(point - last, na.rm = T)
+  expect_lt(max, 0.01)
+})
+
+
 
