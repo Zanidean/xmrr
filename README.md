@@ -44,3 +44,6 @@ df <- data.frame(Year, Measure)
 xmr(df, "Measure", recalc = T)
 
 ```
+
+
+This package is part of a many I use in my procedures. [Please check the Analysis Home for more packages and uses.](file:///Q:/StrategicResearch/Rules%20and%20Procedures%20Folder/Checklists%20and%20procedures/Procedure%20Manual/Data%20Analysis/Home.html)
