@@ -23,7 +23,7 @@ For the official CRAN version:
 install.packages("xmrr")
 ```
 
-Typical Use
+Usage
 ------------
 
 XMRS have two key asssumptions:
