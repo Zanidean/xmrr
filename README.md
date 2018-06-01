@@ -14,7 +14,6 @@ Installation
 For the development version:
 
 ``` R
-install.packages("xmrr")
 devtools::install_github("zanidean/xmrr")
 ```
 

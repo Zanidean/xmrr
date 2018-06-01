@@ -30,7 +30,7 @@
 
 <meta property="og:title" content="Generate the XMR data for any time-series data. — xmr" />
 
-<meta property="og:description" content="Will be used to calculate XMR data." />
+<meta property="og:description" content="Used to calculate XMR data." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,29 +108,24 @@
 
     <div class="ref-description">
     
-    <p>Will be used to calculate XMR data.</p>
+    <p>Used to calculate XMR data.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>xmr</span>(<span class='no'>df</span>, <span class='no'>measure</span>, <span class='no'>interval</span>, <span class='no'>recalc</span>, <span class='no'>reuse</span>, <span class='no'>testing</span>, <span class='no'>longrun</span>, <span class='no'>shortrun</span>)</pre>
+    <pre class="usage"><span class='fu'>xmr</span>(<span class='no'>df</span>, <span class='no'>measure</span>, <span class='no'>recalc</span>, <span class='no'>reuse</span>, <span class='no'>interval</span>, <span class='no'>longrun</span>, <span class='no'>shortrun</span>, <span class='no'>testing</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>The dataframe containing the time-series data. 
-Must be in tidy format.
-At least 1 variable for time and one variable for measure.</p></td>
+      <td><p>The dataframe or tibble to calculate from.
+Data must be in a tidy format.
+At least one variable for time and one variable for measure.</p></td>
     </tr>
     <tr>
       <th>measure</th>
       <td><p>The column containing the measure. Must be in numeric format.</p></td>
-    </tr>
-    <tr>
-      <th>interval</th>
-      <td><p>The interval you'd like to use to calculate the averages. 
-Defaults to 5.</p></td>
     </tr>
     <tr>
       <th>recalc</th>
@@ -141,8 +136,9 @@ Defaults to 5.</p></td>
       <td><p>Logical: Should points be re-used in calculations? Defaults to False</p></td>
     </tr>
     <tr>
-      <th>testing</th>
-      <td><p>Logical to print test results</p></td>
+      <th>interval</th>
+      <td><p>The interval you'd like to use to calculate the averages. 
+Defaults to 5.</p></td>
     </tr>
     <tr>
       <th>longrun</th>
@@ -151,6 +147,10 @@ Defaults to 5.</p></td>
     <tr>
       <th>shortrun</th>
       <td><p>Used to determine rules for a short run. The first point is the minimum number of points within the set to qualify a shortrun, and the second is the length of a possible set. Default is c(3,4) which states that 3 of 4 points need to pass the test to be used in a calculation. If a single value is used, then that value is used twice i.e. c(3,3))</p></td>
+    </tr>
+    <tr>
+      <th>testing</th>
+      <td><p>Logical to print test results</p></td>
     </tr>
     </table>
     
