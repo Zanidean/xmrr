@@ -1,0 +1,110 @@
+---
+title: "How to use xmr_chart()"
+author: "Alex Zanidean"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  html_document: 
+    css: P:/custom.css
+    fig_height: 4
+    fig_width: 10
+    theme: lumen
+    toc: yes
+---
+
+If you're not in the right place, maybe you want to go to our [Analysis Home.](Q:\StrategicResearch\Rules and Procedures Folder\Checklists and procedures\Procedure Manual\Data Analysis\Home.html)
+
+```{r, echo = F, message=F}
+library(tidyverse)
+library(xmrr)
+
+Year <- c(2000:2010)
+Measure <- c(55,55,54,56,57,54,43,45,47,54,43)
+Group = "A"
+df <- tibble(Year,Measure, Group)
+
+Measure <- c(65,65,64,66,67,64,73,75,77,74,53)
+Group = "B"
+
+df_group <- bind_rows(df, tibble(Year, Measure, Group))
+
+```
+
+The following is how to use the xmr_chart function in *xmrr*.
+
+
+##Tidy Data
+
+First, *xmrr::xmr* expects tidy data, with at least one column that for a time variable, and another for the actual measurement variable.
+
+```{r, echo = T}
+df
+```
+
+##xmr
+
+xmr_chart only takes data that looks like this.
+
+```{r}
+df %>% xmr("Measure", recalc = T)
+```
+
+##Function {.tabset}
+
+The following is how you use some of the arguments. I show them here one-by-one, but they can be all used at once, and in any order.
+
+###Basic Chart
+
+```{r, echo = T}
+df %>% 
+  xmr("Measure", recalc = T) %>% 
+  xmr_chart("Year", "Measure")
+```
+
+###Line-Type
+
+```{r, echo = T}
+df %>% 
+  xmr("Measure", recalc = T) %>% 
+  xmr_chart("Year", "Measure", boundary_linetype = 4, central_linetype = 6)
+```
+
+###Point-Size 
+```{r, echo = T}
+df %>% 
+  xmr("Measure", recalc = T) %>% 
+  xmr_chart("Year", "Measure", point_size = 5)
+```
+
+###Colour
+```{r, echo = T}
+df %>% 
+  xmr("Measure", recalc = T) %>% 
+  xmr_chart("Year", "Measure", point_colour = "blue", boundary_colour = "purple")
+```
+
+###Text
+
+```{r, echo = T}
+df %>% 
+  xmr("Measure", recalc = T) %>% 
+  xmr_chart("Year", "Measure", text_size = 15)
+```
+
+##Facets
+
+Often we'll have datasets that contain multiple factors. With dplyr it's possible to pipe a grouped dataframe into the function and have the function operate on a per-group basis. 
+
+We also need to wrap the xmr funciton in the generic do() function for it to work on each group.
+
+This dataframe can be visualized using the xmr_chart function, then because it outputs a ggplot2 object, it can be faceted by an other factor in the data.
+
+```{r, echo = T}
+df_group %>% 
+  group_by(Group) %>% 
+  do(xmr(., "Measure", recalc = T)) %>% 
+  xmr_chart("Year", "Measure") + 
+  facet_wrap(~Group)
+
+```
+
+[Analysis Home](Q:\StrategicResearch\Rules and Procedures Folder\Checklists and procedures\Procedure Manual\Data Analysis\Home.html)
