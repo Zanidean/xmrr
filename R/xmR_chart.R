@@ -27,7 +27,7 @@ xmr_chart <- function(df, time, measure,
                       point_size = 2,
                       line_width = 0.5,
                       text_size = 9){
-    . <- "Shut up"
+    . <- "donotuse"
     `Central Line` <- .
     `Lower Natural Process Limit` <- .
     `Upper Natural Process Limit` <- .
