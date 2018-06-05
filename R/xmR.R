@@ -5,7 +5,7 @@
 #'Data must be in a tidy format.
 #'At least one variable for time and one variable for measure.
 #'@param measure The column containing the measure. Must be in numeric format.
-#'@param recalc Logical: if you'd like it to recalculate bounds. Defaults to False
+#'@param recalc Logical: if you'd like it to recalculate bounds. Defaults to True
 #'@param reuse Logical: Should points be re-used in calculations? Defaults to False
 #'@param interval The interval you'd like to use to calculate the averages. 
 #'Defaults to 5.
@@ -23,7 +23,7 @@
 #'@import ggplot2
 #'@import tidyr
 #'@export xmr
-xmr <- function(df, measure, recalc, reuse, interval, longrun, shortrun, testing) {
+xmr <- function(df, measure, recalc = T, reuse, interval, longrun, shortrun, testing) {
   
   . <- "NA"
   
@@ -35,7 +35,7 @@ xmr <- function(df, measure, recalc, reuse, interval, longrun, shortrun, testing
     interval <- 5
     }
   if (missing(recalc)){
-    recalc <- F
+    recalc <- T
     }
   if (missing(testing)){
     testing <- F
