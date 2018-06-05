@@ -32,6 +32,9 @@ xmr_chart <- function(df, time, measure,
     `Lower Natural Process Limit` <- .
     `Upper Natural Process Limit` <- .
     
+    if(missing(time)){time <- names(df)[1]}
+    if(missing(measure)){measure <- names(df)[2]}
+    
     plot <- ggplot2::ggplot(df, aes(as.character(df[[time]]), group = 1)) +
       geom_line(aes(y = `Central Line`),
                 size = line_width, 

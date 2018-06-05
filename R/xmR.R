@@ -26,6 +26,11 @@
 xmr <- function(df, measure, recalc, reuse, interval, longrun, shortrun, testing) {
   
   . <- "NA"
+  
+  if(missing(measure)){
+    measure <- names(df)[2]
+    }
+  
   if (missing(interval)){
     interval <- 5
     }
