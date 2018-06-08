@@ -437,5 +437,8 @@ xmr <- function(df, measure, recalc = T, reuse, interval, longrun, shortrun, tes
     df$`Lower Natural Process Limit` <- NA
     df$`Upper Natural Process Limit` <- NA
   }
+  
+  class(df) <- c(class(df), "xmr")
+  
   return(df)
 }

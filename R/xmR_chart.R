@@ -27,6 +27,10 @@ xmr_chart <- function(df, time, measure,
                       point_size = 2,
                       line_width = 0.5,
                       text_size = 9){
+  
+  
+  if("xmr" %in% class(df)){
+  
     . <- "donotuse"
     `Central Line` <- .
     `Lower Natural Process Limit` <- .
@@ -71,5 +75,5 @@ xmr_chart <- function(df, time, measure,
             axis.text.x = element_text(colour = "#000000", size = text_size-2),
             axis.title.x = element_text(size = text_size, face = "bold"))
     return(plot)
- 
+  } else {warning("Data has not been analyzed using xmr().")}
 }
