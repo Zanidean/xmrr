@@ -1,10 +1,11 @@
+
+
 library(testthat)
 library(xmrr)
 library(dplyr)
 library(tidyr)
 
 
-context("Calculate XMR Basics")
 
 int_test <- 100
 

@@ -1,10 +1,11 @@
+context("Shortrun Tests")
+
 library(testthat)
 library(xmrr)
 library(dplyr)
 library(tidyr)
 
 
-context("Shortrun Tests")
 
 int_test <- 18
 

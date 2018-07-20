@@ -12,9 +12,7 @@
 #'@param line_width Width of lines. Defaults to 0.5.
 #'@param text_size Size of chart text. Defaults to 9.
 #'@examples
-#'\donttest{
-#'xmr_chart(df, "Year", "Measure")
-#'}
+#'\dontrun{ xmr_chart(df, "Year", "Measure") }
 #'@import dplyr
 #'@import ggplot2
 #'@import tidyr
@@ -32,7 +30,9 @@ xmr_chart <- function(df, time, measure,
   if("Upper Natural Process Limit" %in% names(df)){
   
     . <- "donotuse"
+    `Order` <- .
     `Central Line` <- .
+    `Average Moving Range` <- .
     `Lower Natural Process Limit` <- .
     `Upper Natural Process Limit` <- .
     

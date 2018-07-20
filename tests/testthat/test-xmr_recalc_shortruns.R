@@ -1,10 +1,11 @@
+context("Calculate XMR Short Run Recalculation")
+
 library(testthat)
 library(xmrr)
 library(dplyr)
 library(tidyr)
 
 
-context("Calculate XMR Short Run Recalculation")
 
 Measure <- c(58, 57, 69, 62, 66, 58, 66, 52, 51, 51, 87, 78, 99, 100, 89, 82, 95, 99)
 Time <- c(2000:2017) 

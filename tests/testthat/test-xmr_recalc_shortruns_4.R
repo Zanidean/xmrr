@@ -1,9 +1,9 @@
+context("Calculate XMR Short Run Recalculation for 3/4 points")
+
 library(testthat)
 library(xmrr)
 library(dplyr)
 library(tidyr)
-
-context("Calculate XMR Short Run Recalculation for 3/4 points")
 
 Measure <- c(58, 57, 69, 62, 66, 58, 66, 52, 67, 51, 51)
 Time <- c(2000:2010) 

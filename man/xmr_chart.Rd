@@ -34,7 +34,5 @@ xmr_chart(df, time, measure, boundary_linetype = "dashed",
 Useful for diagnostics on xmr, and just visualizing the data.
 }
 \examples{
-\donttest{
-xmr_chart(df, "Year", "Measure")
-}
+\dontrun{ xmr_chart(df, "Year", "Measure") }
 }

@@ -30,10 +30,6 @@ Defaults to 5.}
 Used to calculate XMR data.
 }
 \examples{
-\donttest{
-df <- xmr(df, "Measure", recalc = T)
-}
-\donttest{
-df <- xmr(df, "Measure", recalc = T, shortrun = c(3,4), longrun = c(5,8))
-}
+\dontrun{ xmr(df, "Measure", recalc = T) }
+\dontrun{ xmr(df, "Measure", recalc = T, shortrun = c(3,4), longrun = c(5,8))}
 }
