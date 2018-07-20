@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Charts</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<p>#Introduction</p>
+
+<p>XMR control charts are useful when determining if there are significant trends in data. XMR charts have two key assumptions: one is that the measurements of value happen over time, and the other is that each measurement of time has exactly one measurement of value. </p>
+
+<p>Take careful thought about <em>what</em> you are trying to measure with XMR. Proportions work great, headcount is okay, costs over time don&#39;t work well.</p>
+
+<hr/>
+
+<p>#Arguments</p>
+
+<p>The arguments for <code>xmr()</code> are: </p>
+
+<ul>
+<li><p><strong>df</strong>: The dataframe containing the time-series data.</p></li>
+<li><p><strong>measure</strong>: The column containing the measure. This must be in a numeric format.</p></li>
+<li><p><strong>interval</strong>: The interval you&#39;d like to use to calculate the averages. Defaults to 5.</p></li>
+<li><p><strong>recalc</strong>: Logical if you&#39;d like it to recalculate bounds. Defaults to False for safety.</p></li>
+<li><p><strong>reuse</strong>: Logical: Should points be re-used in calculations? Defaults to False.</p></li>
+<li><p><strong>longrun</strong>: A vector of 2 to determine the rules for a long run. The first point is the &#39;n&#39; of points used to calculate the new reference lines, and the second is to determine how many consecutive points are needed to define a longrun. Default is c(5,8) which uses the first 5 points of a run of 8 to recalculate the bounds. </p></li>
+<li><p><strong>shortrun</strong>: A vector of 2 to determine the rules for a short run. The first point is the minimum number of points within the set to qualify a shortrun, and the second is the length of a possible set. Default is c(3,4) which states that 3 of 4 consecutive points need to pass the test to be used in a calculation. </p></li>
+</ul>
+
+<p>The data required for XMR charts take a specific format, with at least two columns of data - one for the time variable and another for the measurement. </p>
+
+<p>Like so:</p>
+
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.5.1
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="center">Time</th>
+<th align="center">Measure</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="center">2000</td>
+<td align="center">54</td>
+</tr>
+<tr>
+<td align="center">2001</td>
+<td align="center">56</td>
+</tr>
+<tr>
+<td align="center">2002</td>
+<td align="center">59</td>
+</tr>
+<tr>
+<td align="center">2003</td>
+<td align="center">65</td>
+</tr>
+<tr>
+<td align="center">2004</td>
+<td align="center">53</td>
+</tr>
+<tr>
+<td align="center">2005</td>
+<td align="center">64</td>
+</tr>
+<tr>
+<td align="center">2006</td>
+<td align="center">65</td>
+</tr>
+<tr>
+<td align="center">2007</td>
+<td align="center">61</td>
+</tr>
+<tr>
+<td align="center">2008</td>
+<td align="center">60</td>
+</tr>
+<tr>
+<td align="center">2009</td>
+<td align="center">51</td>
+</tr>
+<tr>
+<td align="center">2010</td>
+<td align="center">53</td>
+</tr>
+<tr>
+<td align="center">2011</td>
+<td align="center">53</td>
+</tr>
+<tr>
+<td align="center">2012</td>
+<td align="center">80</td>
+</tr>
+<tr>
+<td align="center">2013</td>
+<td align="center">76</td>
+</tr>
+<tr>
+<td align="center">2014</td>
+<td align="center">82</td>
+</tr>
+<tr>
+<td align="center">2015</td>
+<td align="center">77</td>
+</tr>
+<tr>
+<td align="center">2016</td>
+<td align="center">81</td>
+</tr>
+<tr>
+<td align="center">2017</td>
+<td align="center">85</td>
+</tr>
+</tbody></table>
+
+<p>If we wanted to use <code>xmr()</code> on this data would be written like this: </p>
+
+<pre><code class="r">xmr_data &lt;- xmr(df = example_data, measure = &quot;Measure&quot;)
+</code></pre>
+
+<p>And if we wanted the bounds to recalculate, we&#39;d use this.</p>
+
+<pre><code class="r">xmr_data &lt;- xmr(df = example_data, measure = &quot;Measure&quot;, recalc = T)
+</code></pre>
+
+<p>Output data looks like this:</p>
+
+<table><thead>
+<tr>
+<th align="center">Time</th>
+<th align="center">Measure</th>
+<th align="center">Central Line</th>
+<th align="center">Moving Range</th>
+<th align="center">Average Moving Range</th>
+<th align="center">Lower Natural Process Limit</th>
+<th align="center">Upper Natural Process Limit</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="center">2000</td>
+<td align="center">54</td>
+<td align="center">57.400</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr>
+<td align="center">2001</td>
+<td align="center">56</td>
+<td align="center">57.400</td>
+<td align="center">2</td>
+<td align="center">5.750</td>
+<td align="center">42.105</td>
+<td align="center">72.695</td>
+</tr>
+<tr>
+<td align="center">2002</td>
+<td align="center">59</td>
+<td align="center">57.400</td>
+<td align="center">3</td>
+<td align="center">5.750</td>
+<td align="center">42.105</td>
+<td align="center">72.695</td>
+</tr>
+<tr>
+<td align="center">2003</td>
+<td align="center">65</td>
+<td align="center">57.400</td>
+<td align="center">6</td>
+<td align="center">5.750</td>
+<td align="center">42.105</td>
+<td align="center">72.695</td>
+</tr>
+<tr>
+<td align="center">2004</td>
+<td align="center">53</td>
+<td align="center">57.400</td>
+<td align="center">12</td>
+<td align="center">5.750</td>
+<td align="center">42.105</td>
+<td align="center">72.695</td>
+</tr>
+<tr>
+<td align="center">2005</td>
+<td align="center">64</td>
+<td align="center">57.400</td>
+<td align="center">11</td>
+<td align="center">5.750</td>
+<td align="center">42.105</td>
+<td align="center">72.695</td>
+</tr>
+<tr>
+<td align="center">2006</td>
+<td align="center">65</td>
+<td align="center">57.400</td>
+<td align="center">1</td>
+<td align="center">5.750</td>
+<td align="center">42.105</td>
+<td align="center">72.695</td>
+</tr>
+<tr>
+<td align="center">2007</td>
+<td align="center">61</td>
+<td align="center">57.400</td>
+<td align="center">4</td>
+<td align="center">5.750</td>
+<td align="center">42.105</td>
+<td align="center">72.695</td>
+</tr>
+<tr>
+<td align="center">2008</td>
+<td align="center">60</td>
+<td align="center">57.400</td>
+<td align="center">1</td>
+<td align="center">5.750</td>
+<td align="center">42.105</td>
+<td align="center">72.695</td>
+</tr>
+<tr>
+<td align="center">2009</td>
+<td align="center">51</td>
+<td align="center">57.400</td>
+<td align="center">9</td>
+<td align="center">5.750</td>
+<td align="center">42.105</td>
+<td align="center">72.695</td>
+</tr>
+<tr>
+<td align="center">2010</td>
+<td align="center">53</td>
+<td align="center">57.400</td>
+<td align="center">2</td>
+<td align="center">5.750</td>
+<td align="center">42.105</td>
+<td align="center">72.695</td>
+</tr>
+<tr>
+<td align="center">2011</td>
+<td align="center">53</td>
+<td align="center">57.400</td>
+<td align="center">0</td>
+<td align="center">5.750</td>
+<td align="center">42.105</td>
+<td align="center">72.695</td>
+</tr>
+<tr>
+<td align="center">2012</td>
+<td align="center">80</td>
+<td align="center">79.333</td>
+<td align="center">27</td>
+<td align="center">12.333</td>
+<td align="center">46.527</td>
+<td align="center">112.140</td>
+</tr>
+<tr>
+<td align="center">2013</td>
+<td align="center">76</td>
+<td align="center">79.333</td>
+<td align="center">4</td>
+<td align="center">12.333</td>
+<td align="center">46.527</td>
+<td align="center">112.140</td>
+</tr>
+<tr>
+<td align="center">2014</td>
+<td align="center">82</td>
+<td align="center">79.333</td>
+<td align="center">6</td>
+<td align="center">12.333</td>
+<td align="center">46.527</td>
+<td align="center">112.140</td>
+</tr>
+<tr>
+<td align="center">2015</td>
+<td align="center">77</td>
+<td align="center">79.333</td>
+<td align="center">5</td>
+<td align="center">12.333</td>
+<td align="center">46.527</td>
+<td align="center">112.140</td>
+</tr>
+<tr>
+<td align="center">2016</td>
+<td align="center">81</td>
+<td align="center">79.333</td>
+<td align="center">4</td>
+<td align="center">12.333</td>
+<td align="center">46.527</td>
+<td align="center">112.140</td>
+</tr>
+<tr>
+<td align="center">2017</td>
+<td align="center">85</td>
+<td align="center">79.333</td>
+<td align="center">4</td>
+<td align="center">12.333</td>
+<td align="center">46.527</td>
+<td align="center">112.140</td>
+</tr>
+</tbody></table>
+
+<p>The only mandatory arguments are <strong>df</strong>, because the function needs to operate on a dataframe, and <strong>measure</strong> because the function needs to be told which column contains the measurements. Everything else has been set to what I believe is a safe and sensible default. </p>
+
+<p>In our shop, we typically run the following rules. Since they are the default, there is no need to specify them directly:</p>
+
+<pre><code class="r">xmr_data &lt;- xmr(example_data,  &quot;Measure&quot;, 
+                recalc = T,
+                interval = 5,
+                shortrun = c(3,4),
+                longrun = c(5,8))
+</code></pre>
+
+<p>Feel free to play around with your own definitions of what a shortrun or longrun is.</p>
+
+<pre><code class="r">xmr_data &lt;- xmr(df = example_data, 
+                measure = &quot;Measure&quot;, 
+                recalc = T,
+                #change the rule like so:,
+                interval = 4,
+                shortrun = c(2,3))
+</code></pre>
+
+<p>The statistical differences between rules are slight, but each user will have different needs and it&#39;s useful to be able to tune the function to those needs. </p>
+
+<p>It is important to use a consistent definition of what a long/short run are. It wouldn&#39;t be appropriate in one report to use one set of definitions for one dataset, and another set for a different dataset.</p>
+
+<hr/>
+
+<h1>Charts</h1>
+
+<p>The <code>xmr()</code> function is handy for generating chart data as the output can be saved and used in other applications. But what about visualization within R?</p>
+
+<p><code>xmr_chart()</code> takes the output from <code>xmr()</code> and generates a ggplot graphic. This works well for reporting, but it also works great for quick diagnostics of your data.</p>
+
+<p>The arguments for <code>xmr_chart()</code> are: </p>
+
+<ul>
+<li><p><strong>df</strong>: Output from xmr()</p></li>
+<li><p><strong>time</strong>: The column containing the time variable for the x-axis.</p></li>
+<li><p><strong>measure</strong>: The column containing the measure for the y-axis. </p></li>
+<li><p><strong>boundary_linetype</strong>: Type of line for upper and lower boundary lines. Defaults to &ldquo;dashed&rdquo;.</p></li>
+<li><p><strong>central_linetype</strong>: Type of line for central line. Defaults to &ldquo;dotted&rdquo;.</p></li>
+<li><p><strong>boundary_colour</strong>:  Colour of line for upper and lower boundary lines. Defaults to &ldquo;#d02b27&rdquo;.</p></li>
+<li><p><strong>point_colour</strong>: Colour of points. Defaults to &ldquo;#7ECBB5&rdquo;.</p></li>
+<li><p><strong>point_size</strong>:   Size of points. Defaults to 2.</p></li>
+<li><p><strong>line_width</strong>:   Width of lines. Defaults to 0.5.</p></li>
+<li><p><strong>text_size</strong>:    Size of chart text. Defaults to 9.</p></li>
+</ul>
+
+<p>There are defaults set for most arguments, so all the user <em>needs</em> to supply are the column names for the Time and Measurement column unless they want some slight modification of the default chart.</p>
+
+<pre><code class="r">xmr_chart(df = xmr_data, 
+          time = &quot;Time&quot;, 
+          measure = &quot;Measure&quot;,
+          line_width = 0.75, text_size = 12, point_size = 2.5)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-7"/></p>
+
+<p>A work-flow that I use is to &#39;pipe&#39; the output of <code>xmr()</code> directly into <code>xmr_chart()</code>:</p>
+
+<pre><code class="r">example_data %&gt;% 
+  xmr(&quot;Measure&quot;, recalc = T) %&gt;% 
+  xmr_chart(&quot;Time&quot;, &quot;Measure&quot;)
+</code></pre>
+
+<hr/>
+
+<h1>Tidyverse - dplyr &amp; ggplot2</h1>
+
+<p>Simple datasets like those illustrated above are common, but how could we work with large datasets that have multiple factors?</p>
+
+<p>Consider the following data. How would <code>xmr()</code> benefit the user in this case? </p>
+
+<table><thead>
+<tr>
+<th align="center">Year</th>
+<th align="center">Variable</th>
+<th align="center">Measure</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="center">2004</td>
+<td align="center">A</td>
+<td align="center">38</td>
+</tr>
+<tr>
+<td align="center">2005</td>
+<td align="center">A</td>
+<td align="center">78</td>
+</tr>
+<tr>
+<td align="center">2006</td>
+<td align="center">A</td>
+<td align="center">93</td>
+</tr>
+<tr>
+<td align="center">2007</td>
+<td align="center">A</td>
+<td align="center">21</td>
+</tr>
+<tr>
+<td align="center">2008</td>
+<td align="center">A</td>
+<td align="center">65</td>
+</tr>
+<tr>
+<td align="center">2009</td>
+<td align="center">A</td>
+<td align="center">13</td>
+</tr>
+<tr>
+<td align="center">2010</td>
+<td align="center">A</td>
+<td align="center">27</td>
+</tr>
+<tr>
+<td align="center">2011</td>
+<td align="center">A</td>
+<td align="center">39</td>
+</tr>
+<tr>
+<td align="center">2012</td>
+<td align="center">A</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">2013</td>
+<td align="center">A</td>
+<td align="center">38</td>
+</tr>
+<tr>
+<td align="center">2014</td>
+<td align="center">A</td>
+<td align="center">87</td>
+</tr>
+<tr>
+<td align="center">2015</td>
+<td align="center">A</td>
+<td align="center">34</td>
+</tr>
+<tr>
+<td align="center">2016</td>
+<td align="center">A</td>
+<td align="center">48</td>
+</tr>
+<tr>
+<td align="center">2017</td>
+<td align="center">A</td>
+<td align="center">60</td>
+</tr>
+<tr>
+<td align="center">2004</td>
+<td align="center">B</td>
+<td align="center">49</td>
+</tr>
+<tr>
+<td align="center">2005</td>
+<td align="center">B</td>
+<td align="center">19</td>
+</tr>
+<tr>
+<td align="center">2006</td>
+<td align="center">B</td>
+<td align="center">83</td>
+</tr>
+<tr>
+<td align="center">2007</td>
+<td align="center">B</td>
+<td align="center">67</td>
+</tr>
+<tr>
+<td align="center">2008</td>
+<td align="center">B</td>
+<td align="center">79</td>
+</tr>
+<tr>
+<td align="center">2009</td>
+<td align="center">B</td>
+<td align="center">11</td>
+</tr>
+<tr>
+<td align="center">2010</td>
+<td align="center">B</td>
+<td align="center">72</td>
+</tr>
+<tr>
+<td align="center">2011</td>
+<td align="center">B</td>
+<td align="center">41</td>
+</tr>
+<tr>
+<td align="center">2012</td>
+<td align="center">B</td>
+<td align="center">82</td>
+</tr>
+<tr>
+<td align="center">2013</td>
+<td align="center">B</td>
+<td align="center">65</td>
+</tr>
+<tr>
+<td align="center">2014</td>
+<td align="center">B</td>
+<td align="center">78</td>
+</tr>
+<tr>
+<td align="center">2015</td>
+<td align="center">B</td>
+<td align="center">55</td>
+</tr>
+<tr>
+<td align="center">2016</td>
+<td align="center">B</td>
+<td align="center">53</td>
+</tr>
+<tr>
+<td align="center">2017</td>
+<td align="center">B</td>
+<td align="center">79</td>
+</tr>
+</tbody></table>
+
+<p>The answer is by leveraging other R packages, namely the <code>tidyverse</code>. </p>
+
+<p>You can install and load the tidyverse with: </p>
+
+<pre><code class="r">#this installs many useful packages
+install.packages(&quot;tidyverse&quot;)
+
+#this just loads the ones we need
+library(dplyr)
+library(ggplot2)
+</code></pre>
+
+<p>With <code>dplyr</code>, we can make use of powerful data-wrangling verbs without writing them into <code>xmrr</code>&#39;s functions specifically:</p>
+
+<ul>
+<li><code>select()</code>:-  picks variables based on their names.</li>
+<li><code>filter()</code>:-  picks cases based on their values.</li>
+<li><code>arrange()</code>:- changes the ordering of the rows.</li>
+<li><code>mutate()</code>:-  adds new variables that are functions of existing variables.</li>
+<li><code>summarise()</code>:-   reduces multiple values down to a single summary.</li>
+<li><code>group_by()</code>:-    allows for group operations in the &ldquo;split-apply-combine&rdquo; concept</li>
+</ul>
+
+<p>Also loaded with <code>dplyr</code> is a powerful operator to chain functions together, called a pipe <code>%&gt;%</code>. </p>
+
+<p>With <code>ggplot2</code>, we take a modern approach to visualizing data. An up-to-date reference list of functions can be found <a href="http://ggplot2.tidyverse.org/reference/">here</a></p>
+
+<p>This enables a number of verb-type functions for tidying, wrangling, and plotting data. This is how to use them alongside the <code>xmr()</code> and <code>xmr_chart()</code> functions. </p>
+
+<hr/>
+
+<h1>Grouping and Faceting</h1>
+
+<p>Take our multiple factor data <code>MFD</code> - here is how to apply the <code>xmr()</code> function to certain groups within that data. </p>
+
+<pre><code class="r">MFD_xmr &lt;- MFD %&gt;% 
+  group_by(Variable) %&gt;% 
+  do(xmr(., &quot;Measure&quot;, recalc = T))
+</code></pre>
+
+<p>To obtain the following:</p>
+
+<table><thead>
+<tr>
+<th align="center">Year</th>
+<th align="center">Variable</th>
+<th align="center">Measure</th>
+<th align="center">Order</th>
+<th align="center">Central Line</th>
+<th align="center">Moving Range</th>
+<th align="center">Average Moving Range</th>
+<th align="center">Lower Natural Process Limit</th>
+<th align="center">Upper Natural Process Limit</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="center">2004</td>
+<td align="center">A</td>
+<td align="center">38</td>
+<td align="center">1</td>
+<td align="center">59.000</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr>
+<td align="center">2005</td>
+<td align="center">A</td>
+<td align="center">78</td>
+<td align="center">2</td>
+<td align="center">59.000</td>
+<td align="center">40</td>
+<td align="center">42.750</td>
+<td align="center">0</td>
+<td align="center">172.715</td>
+</tr>
+<tr>
+<td align="center">2006</td>
+<td align="center">A</td>
+<td align="center">93</td>
+<td align="center">3</td>
+<td align="center">59.000</td>
+<td align="center">15</td>
+<td align="center">42.750</td>
+<td align="center">0</td>
+<td align="center">172.715</td>
+</tr>
+<tr>
+<td align="center">2007</td>
+<td align="center">A</td>
+<td align="center">21</td>
+<td align="center">4</td>
+<td align="center">59.000</td>
+<td align="center">72</td>
+<td align="center">42.750</td>
+<td align="center">0</td>
+<td align="center">172.715</td>
+</tr>
+<tr>
+<td align="center">2008</td>
+<td align="center">A</td>
+<td align="center">65</td>
+<td align="center">5</td>
+<td align="center">59.000</td>
+<td align="center">44</td>
+<td align="center">42.750</td>
+<td align="center">0</td>
+<td align="center">172.715</td>
+</tr>
+<tr>
+<td align="center">2009</td>
+<td align="center">A</td>
+<td align="center">13</td>
+<td align="center">6</td>
+<td align="center">13.667</td>
+<td align="center">52</td>
+<td align="center">34.667</td>
+<td align="center">0</td>
+<td align="center">105.880</td>
+</tr>
+<tr>
+<td align="center">2010</td>
+<td align="center">A</td>
+<td align="center">27</td>
+<td align="center">7</td>
+<td align="center">13.667</td>
+<td align="center">14</td>
+<td align="center">34.667</td>
+<td align="center">0</td>
+<td align="center">105.880</td>
+</tr>
+<tr>
+<td align="center">2011</td>
+<td align="center">A</td>
+<td align="center">39</td>
+<td align="center">8</td>
+<td align="center">13.667</td>
+<td align="center">12</td>
+<td align="center">34.667</td>
+<td align="center">0</td>
+<td align="center">105.880</td>
+</tr>
+<tr>
+<td align="center">2012</td>
+<td align="center">A</td>
+<td align="center">1</td>
+<td align="center">9</td>
+<td align="center">13.667</td>
+<td align="center">38</td>
+<td align="center">34.667</td>
+<td align="center">0</td>
+<td align="center">105.880</td>
+</tr>
+<tr>
+<td align="center">2013</td>
+<td align="center">A</td>
+<td align="center">38</td>
+<td align="center">10</td>
+<td align="center">13.667</td>
+<td align="center">37</td>
+<td align="center">34.667</td>
+<td align="center">0</td>
+<td align="center">105.880</td>
+</tr>
+<tr>
+<td align="center">2014</td>
+<td align="center">A</td>
+<td align="center">87</td>
+<td align="center">11</td>
+<td align="center">13.667</td>
+<td align="center">49</td>
+<td align="center">34.667</td>
+<td align="center">0</td>
+<td align="center">105.880</td>
+</tr>
+<tr>
+<td align="center">2015</td>
+<td align="center">A</td>
+<td align="center">34</td>
+<td align="center">12</td>
+<td align="center">13.667</td>
+<td align="center">53</td>
+<td align="center">34.667</td>
+<td align="center">0</td>
+<td align="center">105.880</td>
+</tr>
+<tr>
+<td align="center">2016</td>
+<td align="center">A</td>
+<td align="center">48</td>
+<td align="center">13</td>
+<td align="center">13.667</td>
+<td align="center">14</td>
+<td align="center">34.667</td>
+<td align="center">0</td>
+<td align="center">105.880</td>
+</tr>
+<tr>
+<td align="center">2017</td>
+<td align="center">A</td>
+<td align="center">60</td>
+<td align="center">14</td>
+<td align="center">13.667</td>
+<td align="center">12</td>
+<td align="center">34.667</td>
+<td align="center">0</td>
+<td align="center">105.880</td>
+</tr>
+<tr>
+<td align="center">2004</td>
+<td align="center">B</td>
+<td align="center">49</td>
+<td align="center">1</td>
+<td align="center">59.400</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr>
+<td align="center">2005</td>
+<td align="center">B</td>
+<td align="center">19</td>
+<td align="center">2</td>
+<td align="center">59.400</td>
+<td align="center">30</td>
+<td align="center">30.500</td>
+<td align="center">0</td>
+<td align="center">140.530</td>
+</tr>
+<tr>
+<td align="center">2006</td>
+<td align="center">B</td>
+<td align="center">83</td>
+<td align="center">3</td>
+<td align="center">59.400</td>
+<td align="center">64</td>
+<td align="center">30.500</td>
+<td align="center">0</td>
+<td align="center">140.530</td>
+</tr>
+<tr>
+<td align="center">2007</td>
+<td align="center">B</td>
+<td align="center">67</td>
+<td align="center">4</td>
+<td align="center">59.400</td>
+<td align="center">16</td>
+<td align="center">30.500</td>
+<td align="center">0</td>
+<td align="center">140.530</td>
+</tr>
+<tr>
+<td align="center">2008</td>
+<td align="center">B</td>
+<td align="center">79</td>
+<td align="center">5</td>
+<td align="center">59.400</td>
+<td align="center">12</td>
+<td align="center">30.500</td>
+<td align="center">0</td>
+<td align="center">140.530</td>
+</tr>
+<tr>
+<td align="center">2009</td>
+<td align="center">B</td>
+<td align="center">11</td>
+<td align="center">6</td>
+<td align="center">59.400</td>
+<td align="center">68</td>
+<td align="center">30.500</td>
+<td align="center">0</td>
+<td align="center">140.530</td>
+</tr>
+<tr>
+<td align="center">2010</td>
+<td align="center">B</td>
+<td align="center">72</td>
+<td align="center">7</td>
+<td align="center">59.400</td>
+<td align="center">61</td>
+<td align="center">30.500</td>
+<td align="center">0</td>
+<td align="center">140.530</td>
+</tr>
+<tr>
+<td align="center">2011</td>
+<td align="center">B</td>
+<td align="center">41</td>
+<td align="center">8</td>
+<td align="center">59.400</td>
+<td align="center">31</td>
+<td align="center">30.500</td>
+<td align="center">0</td>
+<td align="center">140.530</td>
+</tr>
+<tr>
+<td align="center">2012</td>
+<td align="center">B</td>
+<td align="center">82</td>
+<td align="center">9</td>
+<td align="center">59.400</td>
+<td align="center">41</td>
+<td align="center">30.500</td>
+<td align="center">0</td>
+<td align="center">140.530</td>
+</tr>
+<tr>
+<td align="center">2013</td>
+<td align="center">B</td>
+<td align="center">65</td>
+<td align="center">10</td>
+<td align="center">59.400</td>
+<td align="center">17</td>
+<td align="center">30.500</td>
+<td align="center">0</td>
+<td align="center">140.530</td>
+</tr>
+<tr>
+<td align="center">2014</td>
+<td align="center">B</td>
+<td align="center">78</td>
+<td align="center">11</td>
+<td align="center">59.400</td>
+<td align="center">13</td>
+<td align="center">30.500</td>
+<td align="center">0</td>
+<td align="center">140.530</td>
+</tr>
+<tr>
+<td align="center">2015</td>
+<td align="center">B</td>
+<td align="center">55</td>
+<td align="center">12</td>
+<td align="center">59.400</td>
+<td align="center">23</td>
+<td align="center">30.500</td>
+<td align="center">0</td>
+<td align="center">140.530</td>
+</tr>
+<tr>
+<td align="center">2016</td>
+<td align="center">B</td>
+<td align="center">53</td>
+<td align="center">13</td>
+<td align="center">59.400</td>
+<td align="center">2</td>
+<td align="center">30.500</td>
+<td align="center">0</td>
+<td align="center">140.530</td>
+</tr>
+<tr>
+<td align="center">2017</td>
+<td align="center">B</td>
+<td align="center">79</td>
+<td align="center">14</td>
+<td align="center">59.400</td>
+<td align="center">26</td>
+<td align="center">30.500</td>
+<td align="center">0</td>
+<td align="center">140.530</td>
+</tr>
+</tbody></table>
+
+<p>And as you may be able to see in the data, the <code>xmr()</code> calculated on Measure <strong>BY</strong> Variable in one chained function instead of having to manually split the data and run the function multiple times. This is possible with an arbitrary number of factors, and leverages the speed of <code>dplyr</code> verbs. </p>
+
+<p>Similarly, <code>ggplot2</code> can be leveraged in plotting. Note that since <code>xmr_chart()</code> outputs a ggplot object, we can apply the regular ggplot2 functions to it and return a faceted chart rather than filtering the chart and making two.</p>
+
+<pre><code class="r">MFD %&gt;% 
+  group_by(Variable) %&gt;% 
+  do(xmr(., &quot;Measure&quot;, recalc = T)) %&gt;% 
+  xmr_chart(&quot;Year&quot;, &quot;Measure&quot;, line_width = 0.75, text_size = 12) + 
+  facet_wrap(~Variable) + 
+  scale_x_discrete(breaks = seq(2004, 2017, 4))
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-13"/></p>
+
+</body>
+
+</html>
