@@ -29,7 +29,7 @@ xmr_chart <- function(df, time, measure,
                       text_size = 9){
   
   
-  if("xmr" %in% class(df)){
+  if("Upper Natural Process Limit" %in% names(df)){
   
     . <- "donotuse"
     `Central Line` <- .

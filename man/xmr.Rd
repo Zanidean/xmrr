@@ -4,7 +4,7 @@
 \alias{xmr}
 \title{Generate the XMR data for any time-series data.}
 \usage{
-xmr(df, measure, recalc, reuse, interval, longrun, shortrun, testing)
+xmr(df, measure, recalc = T, reuse, interval, longrun, shortrun, testing)
 }
 \arguments{
 \item{df}{The dataframe or tibble to calculate from.
@@ -13,7 +13,7 @@ At least one variable for time and one variable for measure.}
 
 \item{measure}{The column containing the measure. Must be in numeric format.}
 
-\item{recalc}{Logical: if you'd like it to recalculate bounds. Defaults to False}
+\item{recalc}{Logical: if you'd like it to recalculate bounds. Defaults to True}
 
 \item{reuse}{Logical: Should points be re-used in calculations? Defaults to False}
 
