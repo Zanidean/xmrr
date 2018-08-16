@@ -19,7 +19,7 @@
 #'@import ggplot2
 #'@import tidyr
 #'@export xmr
-xmr <- function(df, measure, recalc = T, reuse, interval, longrun, shortrun, testing) {
+xmr <- function(df, measure, recalc = T, reuse, interval, longrun, shortrun, testing, prefer_longrun) {
   
   . <- "donotuse"
   `Order` <- .
@@ -51,6 +51,10 @@ xmr <- function(df, measure, recalc = T, reuse, interval, longrun, shortrun, tes
     shortrun <- c(3, 4)
   }
   
+  if (missing(prefer_longrun)){
+    prefer_longrun <- F
+  }
+  
   sr_length = length(shortrun)
   
   if(length(shortrun) == 1){
@@ -70,6 +74,8 @@ xmr <- function(df, measure, recalc = T, reuse, interval, longrun, shortrun, tes
     message("Invalid shortrun argument. First digit must be less than or equal to the second.")
   }
 
+  
+  
   round2 <- function(x, n) {
     posneg <- sign(x)
     z <- abs(x) * 10 ^ n
@@ -397,6 +403,12 @@ xmr <- function(df, measure, recalc = T, reuse, interval, longrun, shortrun, tes
     if (recalc == T){
     #calculate inital values
       df <- starter(df)
+      
+      if(prefer_longrun == T){
+        df <- runs(df, "long", "upper", longrun, shortrun)
+        df <- runs(df, "long", "lower", longrun, shortrun)
+      }
+
       df <- runs(df, "short", "upper", longrun, shortrun)
       df <- runs(df, "short", "lower", longrun, shortrun)
       df <- runs(df, "short", "upper", longrun, shortrun)
