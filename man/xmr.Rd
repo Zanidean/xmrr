@@ -4,7 +4,8 @@
 \alias{xmr}
 \title{Generate the XMR data for any time-series data.}
 \usage{
-xmr(df, measure, recalc = T, reuse, interval, longrun, shortrun, testing)
+xmr(df, measure, recalc = T, reuse, interval, longrun, shortrun, testing,
+  prefer_longrun)
 }
 \arguments{
 \item{df}{The dataframe or tibble to calculate from.
@@ -25,6 +26,8 @@ Defaults to 5.}
 \item{shortrun}{Used to determine rules for a short run. The first point is the minimum number of points within the set to qualify a shortrun, and the second is the length of a possible set. Default is c(3,4) which states that 3 of 4 points need to pass the test to be used in a calculation. If a single value is used, then that value is used twice i.e. c(3,3))}
 
 \item{testing}{Logical to print test results}
+
+\item{prefer_longrun}{Logical if you want to first test for long-runs or for short-runs.}
 }
 \description{
 Used to calculate XMR data.
