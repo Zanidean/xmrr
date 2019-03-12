@@ -11,7 +11,7 @@ LazyData: TRUE
 License: GPL-3
 BugReports: https://github.com/Zanidean/xmrr/issues
 Imports: dplyr, tidyr, ggplot2
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Suggests: testthat,
     knitr,
     rmarkdown, purrr
