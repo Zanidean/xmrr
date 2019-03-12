@@ -2,8 +2,8 @@ Package: xmrr
 Type: Package
 Title: Generate XMR Control Chart Data from Time-Series Data
 Description: XMRs combine X-Bar control charts and Moving Range control charts. These functions also will recalculate the reference lines when significant change has occurred. 
-Version: 1.0.39
-Date: 2019-01-11
+Version: 1.1.0
+Date: 2019-03-12
 Authors@R: person("Alex", "Zanidean", email = "AZanidean@mhc.ab.ca",
                   role = c("aut","cre"))
 Maintainer: Alex Zanidean <AZanidean@mhc.ab.ca>
@@ -14,5 +14,5 @@ Imports: dplyr, tidyr, ggplot2
 RoxygenNote: 6.0.1
 Suggests: testthat,
     knitr,
-    rmarkdown
+    rmarkdown, purrr
 VignetteBuilder: knitr
