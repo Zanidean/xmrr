@@ -13,9 +13,6 @@
 #'@param shortrun Used to determine rules for a short run. The first point is the minimum number of points within the set to qualify a shortrun, and the second is the length of a possible set. Default is c(3,4) which states that 3 of 4 points need to pass the test to be used in a calculation. If a single value is used, then that value is used twice i.e. c(3,3))
 #'@param testing Logical to print test results
 #'@param prefer_longrun Logical if you want to first test for long-runs or for short-runs. 
-#'@examples
-#'\dontrun{ xmr(df, "Measure", recalc = T) }
-#'\dontrun{ xmr(df, "Measure", recalc = T, shortrun = c(3,4), longrun = c(5,8))}
 #'@import dplyr
 #'@import ggplot2
 #'@import tidyr

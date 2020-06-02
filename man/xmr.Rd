@@ -32,7 +32,3 @@ Defaults to 5.}
 \description{
 Used to calculate XMR data.
 }
-\examples{
-\dontrun{ xmr(df, "Measure", recalc = T) }
-\dontrun{ xmr(df, "Measure", recalc = T, shortrun = c(3,4), longrun = c(5,8))}
-}

@@ -1,7 +1,6 @@
 context("Calculate XMR Short Run Recalculation")
 
 library(testthat)
-library(xmrr)
 library(dplyr)
 library(tidyr)
 

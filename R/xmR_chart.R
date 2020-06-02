@@ -1,7 +1,7 @@
 #'Generate the XMR chart for XMR data
 #'@description Useful for diagnostics on xmr, and just visualizing the data.
 #'
-#'@param .data Output from xmR()
+#'@param dataframe Output from xmR()
 #'@param time Time column
 #'@param measure Measure
 #'@param boundary_linetype Type of line for upper and lower boundary lines. Defaults to "dashed".
@@ -11,13 +11,10 @@
 #'@param point_size Size of points. Defaults to 2.
 #'@param line_width Width of lines. Defaults to 0.5.
 #'@param text_size Size of chart text. Defaults to 9.
-#'@examples
-#'\dontrun{ xmr_chart(.data, "Year", "Measure") }
-#'@import dplyr
 #'@import ggplot2
 #'@import tidyr
 #'@export xmr_chart
-xmr_chart <- function(.data, time, measure, 
+xmr_chart <- function(dataframe, time, measure, 
                       boundary_linetype = "dashed",
                       central_linetype = "dotted",
                       boundary_colour = "#d02b27",
@@ -27,7 +24,7 @@ xmr_chart <- function(.data, time, measure,
                       text_size = 9){
   
   
-  if("Upper Natural Process Limit" %in% names(.data)){
+  if("Upper Natural Process Limit" %in% names(dataframe)){
   
     . <- "donotuse"
     `Order` <- .
@@ -36,10 +33,10 @@ xmr_chart <- function(.data, time, measure,
     `Lower Natural Process Limit` <- .
     `Upper Natural Process Limit` <- .
     
-    if(missing(time)){time <- names(.data)[1]}
-    if(missing(measure)){measure <- names(.data)[2]}
+    if(missing(time)){time <- names(dataframe)[1]}
+    if(missing(measure)){measure <- names(dataframe)[2]}
     
-    plot <- ggplot2::ggplot(.data, aes(as.character(.data[[time]]), group = 1)) +
+    plot <- ggplot2::ggplot(dataframe, aes(as.character(dataframe[[time]]), group = 1)) +
       geom_line(aes(y = `Central Line`),
                 size = line_width, 
                 linetype = central_linetype, 
@@ -53,10 +50,10 @@ xmr_chart <- function(.data, time, measure,
                 color = boundary_colour,
                 size = line_width, 
                 linetype = boundary_linetype, na.rm = T) +
-      geom_line(aes(y = .data[[measure]])) + 
-      geom_point(aes(y = .data[[measure]]), 
+      geom_line(aes(y = dataframe[[measure]])) + 
+      geom_point(aes(y = dataframe[[measure]]), 
                  size = point_size, color = "#000000") +
-      geom_point(aes(y = .data[[measure]]), 
+      geom_point(aes(y = dataframe[[measure]]), 
                  size = point_size*.625, color = point_colour) +
       guides(colour=FALSE) + 
       labs(x = time, y = measure) + 

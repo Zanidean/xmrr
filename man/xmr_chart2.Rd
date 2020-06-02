@@ -7,29 +7,14 @@
 xmr_chart2(dataframe, time, measure, ...)
 }
 \arguments{
+\item{dataframe}{Output from xmR()}
+
 \item{time}{Time column}
 
 \item{measure}{Measure}
 
-\item{df}{Output from xmR()}
-
-\item{boundary_linetype}{Type of line for upper and lower boundary lines. Defaults to "dashed".}
-
-\item{central_linetype}{Type of line for central line. Defaults to "dotted".}
-
-\item{boundary_colour}{Colour of line for upper and lower boundary lines. Defaults to "#d02b27".}
-
-\item{point_colour}{Colour of points. Defaults to "#7ECBB5".}
-
-\item{point_size}{Size of points. Defaults to 2.}
-
-\item{line_width}{Width of lines. Defaults to 0.5.}
-
-\item{text_size}{Size of chart text. Defaults to 9.}
+\item{...}{Arguments to pipe to xmr_chart()}
 }
 \description{
 Useful for diagnostics on xmr, and just visualizing the data. Now works with more tidy workflows.
-}
-\examples{
-\dontrun{ xmr_chart(df, Year, Measure) }
 }

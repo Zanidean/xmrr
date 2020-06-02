@@ -1,7 +1,7 @@
 context("Specific Long-Run")
 
 library(testthat)
-library(xmrr)
+
 library(dplyr)
 library(tidyr)
 

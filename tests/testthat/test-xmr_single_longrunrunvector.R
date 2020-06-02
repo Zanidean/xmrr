@@ -1,7 +1,6 @@
 context("Shortrun Tests")
 
 library(testthat)
-library(xmrr)
 library(dplyr)
 library(tidyr)
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate the XMR chart for XMR data — xmr_chart • xmrr</title>
+<title>Generate the XMR chart for XMR data. — xmr_chart2 • xmrr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Generate the XMR chart for XMR data — xmr_chart" />
+<meta property="og:title" content="Generate the XMR chart for XMR data. — xmr_chart2" />
 
-<meta property="og:description" content="Useful for diagnostics on xmr, and just visualizing the data." />
+<meta property="og:description" content="Useful for diagnostics on xmr, and just visualizing the data. Now works with more tidy workflows." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,21 +109,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate the XMR chart for XMR data</h1>
+    <h1>Generate the XMR chart for XMR data.</h1>
     
-    <div class="hidden name"><code>xmr_chart.Rd</code></div>
+    <div class="hidden name"><code>xmr_chart2.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Useful for diagnostics on xmr, and just visualizing the data.</p>
+    <p>Useful for diagnostics on xmr, and just visualizing the data. Now works with more tidy workflows.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>xmr_chart</span>(<span class='no'>dataframe</span>, <span class='no'>time</span>, <span class='no'>measure</span>, <span class='kw'>boundary_linetype</span> <span class='kw'>=</span> <span class='st'>"dashed"</span>,
-  <span class='kw'>central_linetype</span> <span class='kw'>=</span> <span class='st'>"dotted"</span>, <span class='kw'>boundary_colour</span> <span class='kw'>=</span> <span class='st'>"#d02b27"</span>,
-  <span class='kw'>point_colour</span> <span class='kw'>=</span> <span class='st'>"#7ECBB5"</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>line_width</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>text_size</span> <span class='kw'>=</span> <span class='fl'>9</span>)</pre>
+    <pre class="usage"><span class='fu'>xmr_chart2</span>(<span class='no'>dataframe</span>, <span class='no'>time</span>, <span class='no'>measure</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,32 +138,8 @@
       <td><p>Measure</p></td>
     </tr>
     <tr>
-      <th>boundary_linetype</th>
-      <td><p>Type of line for upper and lower boundary lines. Defaults to "dashed".</p></td>
-    </tr>
-    <tr>
-      <th>central_linetype</th>
-      <td><p>Type of line for central line. Defaults to "dotted".</p></td>
-    </tr>
-    <tr>
-      <th>boundary_colour</th>
-      <td><p>Colour of line for upper and lower boundary lines. Defaults to "#d02b27".</p></td>
-    </tr>
-    <tr>
-      <th>point_colour</th>
-      <td><p>Colour of points. Defaults to "#7ECBB5".</p></td>
-    </tr>
-    <tr>
-      <th>point_size</th>
-      <td><p>Size of points. Defaults to 2.</p></td>
-    </tr>
-    <tr>
-      <th>line_width</th>
-      <td><p>Width of lines. Defaults to 0.5.</p></td>
-    </tr>
-    <tr>
-      <th>text_size</th>
-      <td><p>Size of chart text. Defaults to 9.</p></td>
+      <th>...</th>
+      <td><p>Arguments to pipe to xmr_chart()</p></td>
     </tr>
     </table>
     

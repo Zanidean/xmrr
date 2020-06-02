@@ -7,7 +7,7 @@ vignette: >
   %\usepackage[UTF-8]{inputenc}
 ---
 
-#Introduction
+# Introduction
 
 XMR control charts are useful when determining if there are significant trends in data. XMR charts have two key assumptions: one is that the measurements of value happen over time, and the other is that each measurement of time has exactly one measurement of value. 
 
@@ -16,7 +16,7 @@ Take careful thought about *what* you are trying to measure with XMR. Proportion
 
 -------
 
-#Arguments
+# Arguments
 
 The arguments for `xmr()` are: 
 
@@ -107,7 +107,7 @@ The `xmr()` function is handy for generating chart data as the output can be sav
 
 The arguments for `xmr_chart()` are: 
 
-- **df**: Output from xmr()
+- **dataframe**: Output from xmr()
 
 - **time**: The column containing the time variable for the x-axis.
 
@@ -130,7 +130,7 @@ The arguments for `xmr_chart()` are:
 There are defaults set for most arguments, so all the user *needs* to supply are the column names for the Time and Measurement column unless they want some slight modification of the default chart.
 
 ```{r, fig.height=5, fig.width=7}
-xmr_chart(df = xmr_data, 
+xmr_chart(dataframe = xmr_data, 
           time = "Time", 
           measure = "Measure",
           line_width = 0.75, text_size = 12, point_size = 2.5)
