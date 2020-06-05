@@ -3,7 +3,7 @@ Type: Package
 Title: Generate XMR Control Chart Data from Time-Series Data
 Description: XMRs combine X-Bar control charts and Moving Range control charts. These functions also will recalculate the reference lines when significant change has occurred. 
 Version: 1.1.1
-Date: 2020-07-02
+Date: 2020-06-02
 Authors@R: person("Alex", "Zanidean", email = "AZanidean@mhc.ab.ca",
                   role = c("aut","cre"))
 Maintainer: Alex Zanidean <AZanidean@mhc.ab.ca>

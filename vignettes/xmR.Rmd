@@ -129,8 +129,8 @@ The arguments for `xmr_chart()` are:
 
 There are defaults set for most arguments, so all the user *needs* to supply are the column names for the Time and Measurement column unless they want some slight modification of the default chart.
 
-```{r, fig.height=5, fig.width=7}
-xmr_chart(dataframe = xmr_data, 
+```{r, fig.height=5, fig.width=7, warning=F}
+xmr_chart(xmr_data, 
           time = "Time", 
           measure = "Measure",
           line_width = 0.75, text_size = 12, point_size = 2.5)
