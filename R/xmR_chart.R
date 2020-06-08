@@ -36,7 +36,8 @@ xmr_chart <- function(dataframe, time, measure,
     if(missing(time)){time <- names(dataframe)[1]}
     if(missing(measure)){measure <- names(dataframe)[2]}
     
-    plot <- ggplot2::ggplot(dataframe, aes(as.character(dataframe[[time]]), group = 1)) +
+    plot <- ggplot2::ggplot(dataframe, 
+                            aes(x = {{time}}), group = 1) +
       geom_line(aes(y = `Central Line`),
                 size = line_width, 
                 linetype = central_linetype, 
@@ -50,10 +51,10 @@ xmr_chart <- function(dataframe, time, measure,
                 color = boundary_colour,
                 size = line_width, 
                 linetype = boundary_linetype, na.rm = T) +
-      geom_line(aes(y = dataframe[[measure]])) + 
-      geom_point(aes(y = dataframe[[measure]]), 
+      geom_line(aes(y = {{measure}})) + 
+      geom_point(aes(y = {{measure}}), 
                  size = point_size, color = "#000000") +
-      geom_point(aes(y = dataframe[[measure]]), 
+      geom_point(aes(y = {{measure}}), 
                  size = point_size*.625, color = point_colour) +
       guides(colour=FALSE) + 
       labs(x = time, y = measure) + 

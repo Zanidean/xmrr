@@ -40,8 +40,10 @@ Like so:
 
 ```{r, message=FALSE, echo = F}
 library(xmrr)
-library(dplyr)
+library(tidyr)
 library(ggplot2)
+library(dplyr)
+library(tibble)
 set.seed(1)
 Measure <- round(runif(12, min = 0.50, max = 0.66)*100, 0)
 Measure <- c(Measure, round(runif(6, min = 0.70, max = .85)*100, 0))
@@ -63,9 +65,10 @@ xmr_data <- xmr(df = example_data, measure = "Measure", recalc = T)
 ```
 
 Output data looks like this:
-```{r, echo=F, message=FALSE}
+```{r, echo=F, message=FALSE, warning = F, eval=F}
 xmr_data <- xmr(example_data, "Measure", 
                 recalc = T) %>% 
+  as_tibble() %>% 
   select(-Order)
 knitr::kable(xmr_data, format = "markdown", align = 'c')
 ```
@@ -74,7 +77,7 @@ The only mandatory arguments are **df**, because the function needs to operate o
 
 In our shop, we typically run the following rules. Since they are the default, there is no need to specify them directly:
 
-```{r, message = FALSE}
+```{r, message = FALSE,eval=F}
 xmr_data <- xmr(example_data,  "Measure", 
                 recalc = T,
                 interval = 5,
@@ -129,7 +132,7 @@ The arguments for `xmr_chart()` are:
 
 There are defaults set for most arguments, so all the user *needs* to supply are the column names for the Time and Measurement column unless they want some slight modification of the default chart.
 
-```{r, fig.height=5, fig.width=7, warning=F}
+```{r, fig.height=5, fig.width=7, warning=F, eval = F}
 xmr_chart(xmr_data, 
           time = "Time", 
           measure = "Measure",
@@ -160,7 +163,7 @@ Variable <- "A"
 FDA <- data.frame(`Year`, Variable, check.names = F)
 Variable <- "B"
 FDB <- data.frame(`Year`, Variable, check.names = F)
-MFD <- rbind(FDA, FDB)
+MFD <- rbind(FDA, FDB) %>% as_tibble()
 
 MFD$Measure <- runif(nrow(MFD))*100
 MFD$Measure <- round(MFD$Measure, 0)
@@ -177,6 +180,7 @@ install.packages("tidyverse")
 
 #this just loads the ones we need
 library(dplyr)
+library(purrr)
 library(ggplot2)
 ```
 
@@ -202,15 +206,16 @@ This enables a number of verb-type functions for tidying, wrangling, and plottin
 
 Take our multiple factor data `MFD` - here is how to apply the `xmr()` function to certain groups within that data. 
 
-```{r}
+```{r, eval = F}
 MFD_xmr <- MFD %>% 
-  group_by(Variable) %>% 
-  do(xmr(., "Measure", recalc = T))
+  group_split(Variable)  %>% 
+  map(xmr, measure = "Measure", recalc = T) %>%
+  map_df(as_tibble)
 ```
 
 To obtain the following:
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval = F}
 knitr::kable(MFD_xmr, format = "markdown", align = 'c')
 ```
 
@@ -218,10 +223,8 @@ And as you may be able to see in the data, the `xmr()` calculated on Measure **B
 
 Similarly, `ggplot2` can be leveraged in plotting. Note that since `xmr_chart()` outputs a ggplot object, we can apply the regular ggplot2 functions to it and return a faceted chart rather than filtering the chart and making two.
 
-```{r, fig.height=5, fig.width=7}
-MFD %>% 
-  group_by(Variable) %>% 
-  do(xmr(., "Measure", recalc = T)) %>% 
+```{r, fig.height=5, fig.width=7, eval = F}
+MFD_xmr %>% 
   xmr_chart("Year", "Measure", line_width = 0.75, text_size = 12) + 
   facet_wrap(~Variable) + 
   scale_x_discrete(breaks = seq(2004, 2017, 4))

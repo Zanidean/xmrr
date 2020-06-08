@@ -4,8 +4,17 @@
 \alias{xmr}
 \title{Generate the XMR data for any time-series data.}
 \usage{
-xmr(df, measure, recalc = T, reuse, interval, longrun, shortrun, testing,
-  prefer_longrun)
+xmr(
+  df,
+  measure,
+  recalc = T,
+  reuse,
+  interval,
+  longrun,
+  shortrun,
+  testing,
+  prefer_longrun
+)
 }
 \arguments{
 \item{df}{The dataframe or tibble to calculate from.
